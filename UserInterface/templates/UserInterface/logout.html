@@ -1,0 +1,11 @@
+{% extends "main/base.html" %}
+
+{% block title %}Log Out page{% endblock %}
+
+{% block content %}
+    <h1>You've logged out from account</h1>
+    <h1></h1>
+    <form action="{% url 'auth' %}">
+        <button  class=" btn btn-success">Log In</button>
+    </form>
+{% endblock %}

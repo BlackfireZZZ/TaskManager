@@ -1,0 +1,23 @@
+{% extends "main/base.html" %}
+
+{% block title %}Auth page{% endblock %}
+
+{% block content %}
+    <h1>Log in an account</h1>
+    <p>Please, log in using the following form:</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ auth_form.username }}<br>
+        {{ auth_form.password }}<br>
+        <button type="submit" class="btn btn-success">Log In</button>
+        <span>{{ error }}</span>
+    </form>
+    <h1></h1>
+    <form action="{% url 'logout_func' %}">
+        <button  class=" btn btn-success">Log Out</button>
+    </form>
+    <h1></h1>
+    <form action="{% url 'register' %}">
+        <button  class=" btn btn-success">Create new account</button>
+    </form>
+{% endblock %}
