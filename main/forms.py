@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ["title", "text"]
+        fields = ["title", "text", "deadline"]
         widgets = {"title": forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': "Enter name"
@@ -14,6 +14,10 @@ class TaskForm(forms.ModelForm):
                 "text": forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': "Enter decription"
+            }),
+            "deadline": forms.DateInput(attrs={
+                'class': 'form-control',
+                'placeholder': "Enter deadline"
             })
         }
 

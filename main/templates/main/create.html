@@ -11,6 +11,7 @@ Create new task
         {% csrf_token %}
         {{ form.title }}<br>
         {{ form.text }}<br>
+        {{ form.deadline }}<br>
         <button type="submit" class="btn btn-success">Submit</button>
         <span>{{ error }}</span>
     </form>

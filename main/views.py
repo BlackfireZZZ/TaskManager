@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import Task
-from UserInterface.models import User
 from .forms import TaskForm
 
 
 def index(request):
-    tasks = Task.objects.order_by('text')
+    tasks = Task.objects.filter(master=request.user)
+    tasks = tasks.order_by('-deadline')
     context = {
         'title': 'Главная страница сайта',
         'tasks': tasks,
@@ -22,7 +22,12 @@ def create(request):
     if request.method == "POST":
         form = TaskForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_task = Task(master=request.user,
+                            title=request.POST.get('title'),
+                            text=request.POST.get('text'),
+                            deadline=request.POST.get('deadline')
+                            )
+            new_task.save()
             return redirect('home')
         else:
             error = 'Форма была неверной'
