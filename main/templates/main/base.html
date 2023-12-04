@@ -20,7 +20,11 @@
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'home' %}">Main</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'about' %}">About</a>
           <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'create' %}">New task</a>
-          <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'auth' %}">LogIn</a>
+          {% if user.username %}
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'logout_func' %}">LogOut</a>
+          {% else %}
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'auth' %}">LogIn</a>
+          {% endif %}
       </nav>
     </div>
 

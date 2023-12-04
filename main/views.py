@@ -4,8 +4,10 @@ from .forms import TaskForm
 
 
 def index(request):
+    if not request.user.is_authenticated:
+        return redirect('auth')
     tasks = Task.objects.filter(master=request.user)
-    tasks = tasks.order_by('-deadline')
+    tasks = tasks.order_by('deadline')
     context = {
         'title': 'Главная страница сайта',
         'tasks': tasks,
@@ -14,10 +16,14 @@ def index(request):
     return render(request, 'main/index.html', context)
 
 def about(request):
+    if not request.user.is_authenticated:
+        return redirect('auth')
     context = {'user': request.user}
     return render(request, 'main/about.html', context)
 
 def create(request):
+    if not request.user.is_authenticated:
+        return redirect('auth')
     error = ''
     if request.method == "POST":
         form = TaskForm(request.POST)

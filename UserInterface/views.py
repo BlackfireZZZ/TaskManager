@@ -12,7 +12,11 @@ def register(request):
         if user_form.is_valid():
             new_user = user_form.save(commit=False)
             # Set the chosen password
-            new_user.set_password(user_form.cleaned_data['password'])
+            password = user_form.clean_password2()
+            if password == "Passwords don't match":
+                error = password
+                return render(request, 'UserInterface/register.html', {'user_form': user_form, 'error': error})
+            new_user.set_password(password)
             # Save the User object
             new_user.save()
         return redirect('auth')
